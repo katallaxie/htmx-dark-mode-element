@@ -2,25 +2,42 @@ export {}
 
 declare global {
   interface Window {
-    ExampleElement: typeof ExampleElement
+    HTMXDarkModeElement: typeof HTMXDarkModeElement
   }
   interface HTMLElementTagNameMap {
-    'example-element': ExampleElement
+    'htmx-dark-mode': HTMXDarkModeElement
   }
 }
 
-export class ExampleElement extends HTMLElement {
+export class HTMXDarkModeElement extends HTMLElement {
+  private static storageKey = 'htmx-dark-mode'
+  private initialValue: boolean = false
+
   constructor() {
     super()
+
+    const value =
+      localStorage.getItem(HTMXDarkModeElement.storageKey) ?? window.matchMedia('(prefers-color-scheme: dark)').matches
+    this.initialValue = typeof value === 'string' ? value === 'true' : value
   }
 
   connectedCallback() {
-    this.textContent = 'Hello, World!'
+    this.setDarkMode(this.initialValue)
+  }
+
+  setDarkMode(enabled: boolean) {
+    localStorage.setItem(HTMXDarkModeElement.storageKey, String(enabled))
+
+    if (enabled) {
+      document.documentElement.setAttribute('data-dark-mode', 'true')
+    } else {
+      document.documentElement.removeAttribute('data-dark-mode')
+    }
   }
 }
 
-customElements.define('example-element', ExampleElement)
+customElements.define('htmx-dark-mode', HTMXDarkModeElement)
 
-export const defineExampleElement = () => {
-  customElements.define('example-element', ExampleElement)
+export const defineHTMXDarkModeElement = () => {
+  customElements.define('htmx-dark-mode', HTMXDarkModeElement)
 }
