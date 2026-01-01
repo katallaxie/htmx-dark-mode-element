@@ -1,6 +1,6 @@
 {
   "name": "@htmx/htmx-dark-mode",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A custom element for adding a toolbar to a textarea for markdown editing.",
   "repository": "https://github.com/katallaxie/htmx-dark-mode-element.git",
   "type": "module",
