@@ -15,6 +15,9 @@ This is a simple HTMX element that can be used to toggle the dark mode on a site
 
 ## Attributes
 
+- `dark-theme` - The name of the dark theme (default: dark)
+- `light-theme` - The name of the light theme (default: light)
+
 ## Installation
 
 ```bash

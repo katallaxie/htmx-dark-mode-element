@@ -13,12 +13,20 @@ export class HTMXDarkModeElement extends HTMLElement {
   private static storageKey = 'htmx-dark-mode'
   private initialValue: boolean = false
 
+  get darkTheme(): string {
+    return this.getAttribute('dark-theme') ?? 'dark'
+  }
+
+  get lightTheme(): string {
+    return this.getAttribute('light-theme') ?? 'light'
+  }
+
   constructor() {
     super()
 
     const value =
       localStorage.getItem(HTMXDarkModeElement.storageKey) ?? window.matchMedia('(prefers-color-scheme: dark)').matches
-    this.initialValue = typeof value === 'string' ? value === 'dark' : value
+    this.initialValue = typeof value === 'string' ? value === this.darkTheme : value
   }
 
   connectedCallback() {
@@ -39,7 +47,7 @@ export class HTMXDarkModeElement extends HTMLElement {
   }
 
   setDarkMode(enabled: boolean) {
-    const value = enabled ? 'dark' : 'light'
+    const value = enabled ? this.darkTheme : this.lightTheme
     localStorage.setItem(HTMXDarkModeElement.storageKey, value)
     document.documentElement.setAttribute('data-theme', value)
   }
