@@ -18,21 +18,30 @@ export class HTMXDarkModeElement extends HTMLElement {
 
     const value =
       localStorage.getItem(HTMXDarkModeElement.storageKey) ?? window.matchMedia('(prefers-color-scheme: dark)').matches
-    this.initialValue = typeof value === 'string' ? value === 'true' : value
+    this.initialValue = typeof value === 'string' ? value === 'dark' : value
   }
 
   connectedCallback() {
+    const checkbox: HTMLInputElement | null = this.querySelector('input[type=checkbox]')
+
+    if (!checkbox) {
+      throw new Error('No input[type=checkbox] found')
+    }
+
+    checkbox.checked = this.initialValue
+    checkbox.addEventListener('change', event => this.handleChange(event))
     this.setDarkMode(this.initialValue)
   }
 
-  setDarkMode(enabled: boolean) {
-    localStorage.setItem(HTMXDarkModeElement.storageKey, String(enabled))
+  handleChange(event: Event) {
+    const target = event.target as HTMLInputElement
+    this.setDarkMode(target.checked)
+  }
 
-    if (enabled) {
-      document.documentElement.setAttribute('data-dark-mode', 'true')
-    } else {
-      document.documentElement.removeAttribute('data-dark-mode')
-    }
+  setDarkMode(enabled: boolean) {
+    const value = enabled ? 'dark' : 'light'
+    localStorage.setItem(HTMXDarkModeElement.storageKey, value)
+    document.documentElement.setAttribute('data-theme', value)
   }
 }
 
