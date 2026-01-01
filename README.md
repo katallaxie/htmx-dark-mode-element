@@ -10,7 +10,9 @@ This is a simple HTMX element that can be used to toggle the dark mode on a site
 ## Usage
 
 ```html
-<htmx-dark-mode></htmx-dark-mode>
+<htmx-dark-mode>
+    <input type="checkbox" value="synthwave" />
+</htmx-dark-mode>
 ```
 
 ## Attributes
