@@ -1,8 +1,8 @@
 {
-  "name": "@htmx/template-element",
+  "name": "@htmx/htmx-dark-mode",
   "version": "0.0.0",
   "description": "A custom element for adding a toolbar to a textarea for markdown editing.",
-  "repository": "zeiss/template-element",
+  "repository": "https://github.com/katallaxie/htmx-dark-mode-element.git",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
