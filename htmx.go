@@ -5,8 +5,8 @@ import (
 )
 
 // DarkMode is the dark mode component.
-func DarkMode() htmx.Node {
-	return htmx.CustomElement("htmx-dark-mode")
+func DarkMode(children ...htmx.Node) htmx.Node {
+	return htmx.CustomElement("htmx-dark-mode", children...)
 }
 
 // DarkTheme sets the dark theme for the dark mode component.
